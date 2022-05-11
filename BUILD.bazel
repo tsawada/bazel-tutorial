@@ -1,0 +1,19 @@
+load("@io_bazel_rules_kotlin//kotlin:jvm.bzl", "kt_jvm_binary", "kt_jvm_library")
+
+kt_jvm_binary(
+    name = "hello",
+    srcs = ["hello.kt"],
+    main_class = "HelloKt",
+    deps = [":concat_lib"],
+)
+
+kt_jvm_library(
+    name = "concat_lib",
+    srcs = ["concat.kt"],
+)
+
+sh_test(
+    name = "hello_test",
+    srcs = ["hello_test.sh"],
+    data = [":hello"],
+)
